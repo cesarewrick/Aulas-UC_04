@@ -21,7 +21,7 @@ class Produto:
     def id(self, novoID):
         self.__id = novoID
 
-    # Getter e Setter para o ID
+    # Getter e Setter para o nome
     @property
     def nome(self):
         return self.__nome
@@ -30,7 +30,7 @@ class Produto:
     def nome(self, novoNome):
         self.__nome = novoNome
 
-    # Getter e Setter para o ID
+    # Getter e Setter para o preço
     @property
     def preco(self):
         return self.__preco
