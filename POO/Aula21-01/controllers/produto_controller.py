@@ -5,6 +5,33 @@ class ProdutoController:
     def __init__(self):
         self.__produtos = [] # Atributo encapsulado (Produtos)
 
+
+    def ordenar_produtos(self, criterio):
+        """Ordena os produtos por um critério escolhido (id, nome ou preco).
+       :param criterio: str - O critério de ordenação ('id', 'nome', 'preco', 'todos')
+        """
+        if not self.__produtos:
+            ProdutoView.mensagem("Nenhum produto para ordenar.")
+            return
+
+        if criterio == "id":
+            self.__produtos.sort(key=lambda produto: produto.id)
+            ProdutoView.mensagem("Produtos ordenados por ID.")
+        elif criterio == "nome":
+            self.__produtos.sort(key=lambda produto: produto.nome.lower())
+            ProdutoView.mensagem("Produtos ordenados por Nome.")
+        elif criterio == "preco":
+            self.__produtos.sort(key=lambda produto: produto.preco)
+            ProdutoView.mensagem("Produtos ordenados por Preço.")
+        elif criterio == "todos":
+            self.__produtos.sort(key=lambda produto: (produto.id, produto.nome.lower(), produto.preco))
+            ProdutoView.mensagem("Produtos ordenados por ID, Nome e Preço.")
+        else:
+            ProdutoView.mensagem("Critério inválido. Escolha entre 'id', 'nome', 'preco' ou 'todos'.")
+        
+        # Exibir os produtos ordenados
+        ProdutoView.listar_produto(self.__produtos)
+
     def criar_produto(self, id, nome, preco):
         if any(produto.id == id for produto in self.__produtos):
             ProdutoView.mensagem("Erro: Ja existe um produto com esse ID.")
